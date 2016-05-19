@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MyExtractor
+Bundle-SymbolicName: MyExtractor;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: myextractor.Activator
+Bundle-Vendor: shaoyuchun
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
