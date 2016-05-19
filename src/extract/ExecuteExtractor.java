@@ -64,7 +64,7 @@ public class ExecuteExtractor {
 		MethodInfoExtractor.resetData();*/
 		
 		long end = System.currentTimeMillis();
-		System.out.println("getDataµÄÊ±¼ä£º" + (t - start));
-		System.out.println("²åÈëÊı¾İ¿âÓÃÊ±£º" + (end - t));
+		System.out.println("getDataç”¨æ—¶ï¼š" + (t - start));
+		System.out.println("æ’å…¥æ•°æ®åº“ç”¨æ—¶ï¼š" + (end - t));
 	}//Java Hello
 }

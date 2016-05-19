@@ -19,9 +19,9 @@ public class Main {
 		//ExecuteExtractor.extracts("E:/workspace/JadeSpring");
 		//ExecuteExtractor.extracts("E:/JavaSource/src/java");
 		
-		System.out.println("Ö´ĞĞ³É¹¦£¡");
+		System.out.println("æ‰§è¡ŒæˆåŠŸï¼");
 		long end = System.currentTimeMillis();
-		System.out.println("×ÜÓÃÊ±£º" + (end - start));
+		System.out.println("æ€»ç”¨æ—¶ï¼š" + (end - start));
 	}
 
 }
