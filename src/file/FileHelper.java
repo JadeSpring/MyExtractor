@@ -34,7 +34,7 @@ public class FileHelper {
 	}
 	
 	/**
-	 * 在文件夹中，获取所有指定后缀后的文件
+	 * 鍦ㄦ枃浠跺す涓紝鑾峰彇鎵�鏈夋寚瀹氬悗缂�鍚庣殑鏂囦欢
 	 * @param path
 	 * @param extension
 	 * @return

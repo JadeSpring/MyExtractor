@@ -21,6 +21,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import astUtil.Visitor;
 import dataUtil.DBManipulation;
 import extract.CommentInfoExtractor;
+import extract.ExecuteExtractor;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 
@@ -75,12 +76,13 @@ public class SampleHandler extends AbstractHandler {
        /* String data = CommentInfoExtractor.getData();
 		final String sqlStatement = "insert into commentinfo values" + data.substring(0, data.length() - 1);
 		DBManipulation.sqlExecute(sqlStatement);*/
-		
+		ExecuteExtractor.extracts("D:\\eclipse\\workspace\\MyExtractor");
+		//System.out.println("hello plug in.");
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		MessageDialog.openInformation(
 				window.getShell(),
 				"MyExtractor",
-				"Ö´ÐÐ³É¹¦");
+				"successful!");
 		
 		return null;
 	}
@@ -97,6 +99,7 @@ public class SampleHandler extends AbstractHandler {
             ASTParser parser = ASTParser.newParser(AST.JLS8);
             parser.setKind(ASTParser.K_COMPILATION_UNIT);
             parser.setSource(unit);
+            
             parser.setResolveBindings(true);
             return (CompilationUnit) parser.createAST(null); // parse
     }

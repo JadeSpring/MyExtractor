@@ -199,17 +199,17 @@ public class CommentInfoExtractor extends Extractor {
 					comment.add(new String(associateComment));
 				}
 				else {
-					comment.add("empty");
+					comment.add("null");
 				}
 				
 				
 			}
 			else {
-				comment.add("empty");
+				comment.add("null");
 			}
 		}
 		else {
-			comment.add("empty");
+			comment.add("null");
 		}
 		
 		this.getCommentType();
@@ -259,22 +259,11 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(ASTNode node) {
-		name.add(AstUtil.getQualifiedName(node));
+		projectName.add(project);
 		
-
-		if ((node instanceof ForStatement) || (node instanceof EnhancedForStatement) || (node instanceof DoStatement) || (node instanceof WhileStatement)) {
-			granularity.add(Granularity.LOOP);
-		}
-		else if ((node instanceof IfStatement) || (node instanceof SwitchStatement)) {
-			granularity.add(Granularity.CONTROL_STRUCTURE);
-		}
-		else {
-			granularity.add("other type");
-		}
+		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		parent.add(this.getParentName(node));
-		
-		code.add(node.toString());
 		
 		this.getComment(node);
 		
@@ -290,23 +279,23 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(AnonymousClassDeclaration node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.CLASS_DECLARATION);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(ArrayAccess node) {
@@ -386,23 +375,23 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(DoStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.LOOP);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(EmptyStatement node) {
@@ -410,23 +399,23 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(EnhancedForStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.LOOP);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(EnumConstantDeclaration node) {
@@ -488,55 +477,55 @@ public class CommentInfoExtractor extends Extractor {
 			if(node.getJavadoc() != null) {
 				String javadoc = node.getJavadoc().toString().trim();
 				code.add(node.toString().substring(javadoc.length() + 1).substring(annotations.length()).trim());
-				this.getComment(node);
 			}
 			else {
 				code.add(node.toString().substring(annotations.length()).trim());
-				this.getComment(node);
 			}
+			
+			this.getComment(node);
 			
 			time.add(this.getCurrentTime());
 		} 
 	}
 	
 	public void extract(ForStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.LOOP);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(IfStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.CONTROL_STRUCTURE);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(ImportDeclaration node) {
@@ -588,15 +577,15 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(MethodDeclaration node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.METHOD_DECLARATION);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		StringBuffer annotations = new StringBuffer("");
 		if (node.modifiers().isEmpty()) {
@@ -622,34 +611,34 @@ public class CommentInfoExtractor extends Extractor {
 		if(node.getJavadoc() != null) {			
 			String javadoc = node.getJavadoc().toString().trim();
 			code.add(node.toString().substring(javadoc.length() + 1).substring(annotations.length()).trim());
-			this.getComment(node);
+			//this.getComment(node);
 		}
 		else {
 			code.add(node.toString().substring(annotations.length()).trim());
-			this.getComment(node);
+			//this.getComment(node);
 		}
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(MethodInvocation node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.METHOD_CALL);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(MethodRef node) {
@@ -757,23 +746,23 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(SwitchStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.CONTROL_STRUCTURE);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(SynchronizedStatement node) {
@@ -801,15 +790,15 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(TypeDeclaration node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.CLASS_DECLARATION);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		StringBuffer annotations = new StringBuffer("");
 		if (node.modifiers().isEmpty()) {
@@ -836,14 +825,14 @@ public class CommentInfoExtractor extends Extractor {
 		if(node.getJavadoc() != null) {			
 			String javadoc = node.getJavadoc().toString().trim();
 			code.add(node.toString().substring(javadoc.length() + 1).substring(annotations.length()).trim());
-			this.getComment(node);
+			//this.getComment(node);
 		}
 		else {
 			code.add(node.toString().substring(annotations.length()).trim());
-			this.getComment(node);
+			//this.getComment(node);
 		}
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(TypeDeclarationStatement node) {
@@ -918,23 +907,23 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(WhileStatement node) {
-		projectName.add(project);
+		//projectName.add(project);
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
-		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		//sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
 		granularity.add(Granularity.LOOP);
 		
-		parent.add(this.getParentName(node));
+		//parent.add(this.getParentName(node));
 		
 		code.add(node.toString());
 		
-		this.getComment(node);
+		//this.getComment(node);
 		
 		annotation.add("null");
 		
-		time.add(this.getCurrentTime());
+		//time.add(this.getCurrentTime());
 	}
 	
 	public void extract(WildcardType node) {

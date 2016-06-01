@@ -4,6 +4,7 @@ import org.eclipse.jdt.core.dom.*;
 
 import extract.Extractor;
 import extract.MethodInfoExtractor;
+import extract.ClassInfoExtractor;
 import extract.CommentInfoExtractor;
 
 public class Visitor extends ASTVisitor {
@@ -15,14 +16,38 @@ public class Visitor extends ASTVisitor {
 		
 	}
 	
+	public void preVisit(ASTNode node) {
+		switch (node.getNodeType()) {
+		case ASTNode.ANONYMOUS_CLASS_DECLARATION:
+		case ASTNode.TYPE_DECLARATION:
+		case ASTNode.METHOD_DECLARATION:
+		case ASTNode.METHOD_INVOCATION:
+		case ASTNode.IF_STATEMENT:
+		case ASTNode.SWITCH_STATEMENT:
+		case ASTNode.FOR_STATEMENT:
+		case ASTNode.ENHANCED_FOR_STATEMENT:
+		case ASTNode.WHILE_STATEMENT:
+		case ASTNode.DO_STATEMENT: {
+			CommentInfoExtractor extractor = new CommentInfoExtractor();
+			extractor.extract(node);
+			break;
+		}
+		default:
+			break;
+		}
+		
+		super.preVisit(node);
+	}
 	/**
 	 * visit method declaration node and extract the project name, qualified name, granularity, code, javadoc and visit time from the node
 	 */
 	public boolean visit(MethodDeclaration node) {
 		Extractor extractor = new CommentInfoExtractor();
 		extractor.extract(node);
-		MethodInfoExtractor methodInfo = new MethodInfoExtractor();
-		methodInfo.extract(node);
+		
+		/*MethodInfoExtractor methodInfo = new MethodInfoExtractor();
+		methodInfo.extract(node);*/
+		
 		return true;
 	}
 	
@@ -32,6 +57,9 @@ public class Visitor extends ASTVisitor {
 	public boolean visit(TypeDeclaration node) {
 		Extractor extractor = new CommentInfoExtractor();
 		extractor.extract(node);
+		
+		ClassInfoExtractor classInfo = new ClassInfoExtractor();
+		classInfo.extract(node);
 		
 		return true;
 	}
@@ -103,6 +131,9 @@ public class Visitor extends ASTVisitor {
 	public boolean visit(AnonymousClassDeclaration node) {
 		Extractor extractor = new CommentInfoExtractor();
 		extractor.extract(node);
+		
+		ClassInfoExtractor classInfo = new ClassInfoExtractor();
+		classInfo.extract(node);
 
 		return true;
 	}

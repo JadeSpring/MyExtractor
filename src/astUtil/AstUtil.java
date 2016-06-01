@@ -105,7 +105,7 @@ public class AstUtil {
 				break;
 			}
 			
-			/*case ASTNode.METHOD_INVOCATION: {
+			case ASTNode.METHOD_INVOCATION: {
 				uri = "methodInvocation." + uri;
 				break;
 			}
@@ -132,7 +132,7 @@ public class AstUtil {
 			case ASTNode.WHILE_STATEMENT: {
 				uri = "while." + uri;
 				break;
-			}*/
+			}
 			
 			default: break;
 			}
@@ -181,7 +181,7 @@ public class AstUtil {
 		return uris;
     }
     
-    public static String getQualifiedName(MethodInvocation node) {
+ /*   public static String getQualifiedName(MethodInvocation node) {
     	String uri = "";
     	
 		uri = AstUtil.getQualifiedName(node.getParent()) + ".methodInvocation";
@@ -226,5 +226,5 @@ public class AstUtil {
 		uri = AstUtil.getQualifiedName(node.getParent()) + ".enhancedFor";
     	return uri;
     }
-    
+    */
 }  

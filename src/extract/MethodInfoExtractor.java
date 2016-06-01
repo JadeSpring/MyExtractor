@@ -11,9 +11,10 @@ public class MethodInfoExtractor {
 	private static String project = ProjectName.getProjectName();
 	private static LinkedList<String> projectName = new LinkedList<String>();
 	private static LinkedList<String> name = new LinkedList<String>();
+	private static LinkedList<String> sourceRange = new LinkedList<String>();
 	private static LinkedList<String> className = new LinkedList<String>();
 	private static LinkedList<String> returnType = new LinkedList<String>();
-	private static LinkedList<String> modifies = new LinkedList<String>();
+	private static LinkedList<String> modifiers = new LinkedList<String>();
 	private static LinkedList<String> throwExceptions = new LinkedList<String>();
 	private static LinkedList<String> isConstructor = new LinkedList<String>();
 	private static LinkedList<String> content = new LinkedList<String>();
@@ -27,9 +28,10 @@ public class MethodInfoExtractor {
 		LinkedList<ArrayList<String>> temp = new LinkedList<ArrayList<String>>();
 		temp.add(new ArrayList<String>(projectName));
 		temp.add(new ArrayList<String>(name));
+		temp.add(new ArrayList<String>(sourceRange));
 		temp.add(new ArrayList<String>(className));
 		temp.add(new ArrayList<String>(returnType));
-		temp.add(new ArrayList<String>(modifies));
+		temp.add(new ArrayList<String>(modifiers));
 		temp.add(new ArrayList<String>(throwExceptions));
 		temp.add(new ArrayList<String>(isConstructor));
 		temp.add(new ArrayList<String>(javadoc));
@@ -37,9 +39,10 @@ public class MethodInfoExtractor {
 		
 		projectName = new LinkedList<String>();
 		name = new LinkedList<String>();
+		sourceRange = new LinkedList<String>();
 		className = new LinkedList<String>();
 		returnType = new LinkedList<String>();
-		modifies = new LinkedList<String>();
+		modifiers = new LinkedList<String>();
 		throwExceptions = new LinkedList<String>();
 		isConstructor = new LinkedList<String>();
 		content = new LinkedList<String>();
@@ -60,6 +63,8 @@ public class MethodInfoExtractor {
 		
 		name.add(AstUtil.getQualifiedName(node));
 		
+		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
+		
 		if(node.getJavadoc() != null) {
 			
 			String comment = node.getJavadoc().toString().trim();
@@ -68,7 +73,7 @@ public class MethodInfoExtractor {
 		}
 		else {
 			content.add(node.toString().trim());
-			javadoc.add("empty");
+			javadoc.add("null");
 		}
 		
 		className.add(AstUtil.getQualifiedName(node.getParent()));
@@ -82,11 +87,11 @@ public class MethodInfoExtractor {
 		
 		
 		if (node.modifiers().isEmpty()) {
-			modifies.add("null");
+			modifiers.add("null");
 		}
 		else {
 			String str = node.modifiers().toString();
-			modifies.add(str.substring(1, str.length() - 1));
+			modifiers.add(str.substring(1, str.length() - 1));
 		}
 		
 		if (node.thrownExceptionTypes().isEmpty()) {

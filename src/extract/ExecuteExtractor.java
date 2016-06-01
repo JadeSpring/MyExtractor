@@ -25,6 +25,7 @@ public class ExecuteExtractor {
 			String content = FileHelper.getContent(file);
 			
 			Content.setContent(content);
+			Content.setFileName(file);
 			
 			ASTParser parser = ASTParser.newParser(AST.JLS8); // initialize
 
@@ -42,15 +43,15 @@ public class ExecuteExtractor {
 		
 		long start = System.currentTimeMillis();
 		
-		ArrayList<ArrayList<String>> data = CommentInfoExtractor.getData();
+		ArrayList<ArrayList<String>> data /*= CommentInfoExtractor.getData()*/;
 		long t = System.currentTimeMillis();
-		if (!data.isEmpty()) {
+		/*if (!data.isEmpty()) {
 			DBManipulation.DoStore("commentinfo", data);
 		}
 		else {
 			System.out.println("failed !");
 		}
-		CommentInfoExtractor.resetData();
+		CommentInfoExtractor.resetData();*/
 		
 		/*data = MethodInfoExtractor.getData();
 		
@@ -63,8 +64,18 @@ public class ExecuteExtractor {
 		}
 		MethodInfoExtractor.resetData();*/
 		
+		data = ClassInfoExtractor.getData();
+		ClassInfoExtractor.resetData();
+		if (!data.isEmpty()) {
+			DBManipulation.DoStore("classinfo", data);
+		}
+		else {
+			System.out.println("failed !");
+		}
+		
 		long end = System.currentTimeMillis();
 		System.out.println("getData用时：" + (t - start));
 		System.out.println("插入数据库用时：" + (end - t));
-	}//Java Hello
+	}
+	
 }
