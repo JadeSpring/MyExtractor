@@ -14,7 +14,6 @@ import file.Content;
 
 public class ClassInfoExtractor {
 	private static ArrayList<ArrayList<String>> data = null;
-	private static String project = ProjectName.getProjectName();
 	private static LinkedList<String> projectName = new LinkedList<String>();
 	private static LinkedList<String> name = new LinkedList<String>();
 	private static LinkedList<String> sourceRange = new LinkedList<String>();
@@ -67,9 +66,9 @@ public class ClassInfoExtractor {
 	}
 	
 	public void extract(TypeDeclaration node) {
-		projectName.add(project);
+		projectName.add(ProjectName.getProjectName());
 		  
-		name.add(AstUtil.getQualifiedName(node));
+		name.add(node.resolveBinding().getQualifiedName());
 		
 		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
@@ -78,14 +77,27 @@ public class ClassInfoExtractor {
 		if (node.getSuperclassType() == null) {
 			superClass.add("null");
 		} else {
-			superClass.add(node.getSuperclassType().toString());
+			if (node.getSuperclassType().resolveBinding() != null) {
+				superClass.add(node.getSuperclassType().resolveBinding().getQualifiedName());
+			}
+			else {
+				superClass.add(node.getSuperclassType().toString());
+			}
 			
 		}
 		
 		if (!node.superInterfaceTypes().isEmpty()) {
 			List<Type> interf = node.superInterfaceTypes();
-			String str = interf.toString();
-			interfaces.add(str.substring(1, str.length() - 1));
+			StringBuffer temp = new StringBuffer("");
+			for (Type inter : interf) {
+				if (inter.resolveBinding() != null) {
+					temp.append(inter.resolveBinding().getQualifiedName() + ",");
+				}
+				else {
+					temp.append(inter + ",");
+				}
+			}
+			interfaces.add(new String(temp.substring(0, temp.lastIndexOf(","))));
 		} else {
 			interfaces.add("null");
 		}
@@ -114,7 +126,7 @@ public class ClassInfoExtractor {
 	}
 	
 	public void extract(AnonymousClassDeclaration node) {
-		projectName.add(project);
+		projectName.add(ProjectName.getProjectName());
 		
 		name.add(AstUtil.getQualifiedName(node));
 		

@@ -15,7 +15,6 @@ public class DBManipulation {
 	private static String password = "jade";
 	private static String driver = "com.mysql.jdbc.Driver";
 	
-	int x, y, z;
 	/**
 	 * use MySQL database by default 
 	 */

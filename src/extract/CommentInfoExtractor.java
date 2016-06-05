@@ -14,7 +14,6 @@ import file.Content;
 
 public class CommentInfoExtractor extends Extractor {
 	private static ArrayList<ArrayList<String>>  data = null;
-	private static String project = ProjectName.getProjectName();
 	
 	private static LinkedList<String> projectName = new LinkedList<String>();
 	private static LinkedList<String> name = new LinkedList<String>();
@@ -259,7 +258,7 @@ public class CommentInfoExtractor extends Extractor {
 	}
 	
 	public void extract(ASTNode node) {
-		projectName.add(project);
+		projectName.add(ProjectName.getProjectName());
 		
 		sourceRange.add(node.getStartPosition() + "+" + node.getLength());
 		
@@ -443,7 +442,7 @@ public class CommentInfoExtractor extends Extractor {
 		LinkedList<String> uris = AstUtil.getQualifiedName(node);
 		Iterator<String> uri = uris.iterator();
 		while(uri.hasNext()) {
-			projectName.add(project);
+			projectName.add(ProjectName.getProjectName());
 			
 			name.add(uri.next());
 			
@@ -867,7 +866,7 @@ public class CommentInfoExtractor extends Extractor {
 		LinkedList<String> uris = AstUtil.getQualifiedName(node);
 		Iterator<String> uri = uris.iterator();
 		while(uri.hasNext()) {
-			projectName.add(project);
+			projectName.add(ProjectName.getProjectName());
 			
 			name.add(uri.next());
 			

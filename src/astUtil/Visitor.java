@@ -4,6 +4,7 @@ import org.eclipse.jdt.core.dom.*;
 
 import extract.Extractor;
 import extract.MethodInfoExtractor;
+import extract.MethodInvocationInfoExtractor;
 import extract.ClassInfoExtractor;
 import extract.CommentInfoExtractor;
 
@@ -16,7 +17,7 @@ public class Visitor extends ASTVisitor {
 		
 	}
 	
-	public void preVisit(ASTNode node) {
+/*	public void preVisit(ASTNode node) {
 		switch (node.getNodeType()) {
 		case ASTNode.ANONYMOUS_CLASS_DECLARATION:
 		case ASTNode.TYPE_DECLARATION:
@@ -37,26 +38,26 @@ public class Visitor extends ASTVisitor {
 		}
 		
 		super.preVisit(node);
-	}
+	}*/
 	/**
 	 * visit method declaration node and extract the project name, qualified name, granularity, code, javadoc and visit time from the node
 	 */
-	public boolean visit(MethodDeclaration node) {
+/*	public boolean visit(MethodDeclaration node) {
 		Extractor extractor = new CommentInfoExtractor();
 		extractor.extract(node);
 		
-		/*MethodInfoExtractor methodInfo = new MethodInfoExtractor();
-		methodInfo.extract(node);*/
+		MethodInfoExtractor methodInfo = new MethodInfoExtractor();
+		methodInfo.extract(node);
 		
 		return true;
-	}
+	}*/
 	
 	/**
 	 * visit type declaration node, class declaration or interface declaration, and extract the project name, qualified name, granularity, code, javadoc and visit time from the node
 	 */
 	public boolean visit(TypeDeclaration node) {
-		Extractor extractor = new CommentInfoExtractor();
-		extractor.extract(node);
+		/*Extractor extractor = new CommentInfoExtractor();
+		extractor.extract(node);*/
 		
 		ClassInfoExtractor classInfo = new ClassInfoExtractor();
 		classInfo.extract(node);
@@ -64,7 +65,7 @@ public class Visitor extends ASTVisitor {
 		return true;
 	}
 	
-	public boolean visit(FieldDeclaration node) {
+/*	public boolean visit(FieldDeclaration node) {
 		Extractor extractor = new CommentInfoExtractor();
 		extractor.extract(node);
 
@@ -120,17 +121,20 @@ public class Visitor extends ASTVisitor {
 
 		return true;
 	}
-	
+	*/
 	public boolean visit(MethodInvocation node) {
-		Extractor extractor = new CommentInfoExtractor();
+		/*Extractor extractor = new CommentInfoExtractor();
+		extractor.extract(node);*/
+		
+		MethodInvocationInfoExtractor extractor = new MethodInvocationInfoExtractor();
 		extractor.extract(node);
 
 		return true;
 	}
 	
 	public boolean visit(AnonymousClassDeclaration node) {
-		Extractor extractor = new CommentInfoExtractor();
-		extractor.extract(node);
+		/*Extractor extractor = new CommentInfoExtractor();
+		extractor.extract(node);*/
 		
 		ClassInfoExtractor classInfo = new ClassInfoExtractor();
 		classInfo.extract(node);

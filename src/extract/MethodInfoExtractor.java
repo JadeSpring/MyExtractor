@@ -8,7 +8,7 @@ import astUtil.AstUtil;
 
 public class MethodInfoExtractor {
 	private static ArrayList<ArrayList<String>> data = null;
-	private static String project = ProjectName.getProjectName();
+
 	private static LinkedList<String> projectName = new LinkedList<String>();
 	private static LinkedList<String> name = new LinkedList<String>();
 	private static LinkedList<String> sourceRange = new LinkedList<String>();
@@ -59,7 +59,7 @@ public class MethodInfoExtractor {
 
 	
 	public void extract(MethodDeclaration node) {
-		projectName.add(project);
+		projectName.add(ProjectName.getProjectName());
 		
 		name.add(AstUtil.getQualifiedName(node));
 		

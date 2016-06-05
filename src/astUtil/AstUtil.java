@@ -51,7 +51,7 @@ public class AstUtil {
         } catch (IOException e) {  
             e.printStackTrace();  
         }
-  
+
 		ASTParser astParser = ASTParser.newParser(AST.JLS8);  
         astParser.setSource(new String(input).toCharArray());  
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);  

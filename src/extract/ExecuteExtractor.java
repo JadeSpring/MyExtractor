@@ -31,9 +31,7 @@ public class ExecuteExtractor {
 
 			parser.setKind(ASTParser.K_COMPILATION_UNIT); // to parse compilation unit
 			
-			parser.setSource(content.toCharArray()); // content is a string
-												     // which stores the java
-													 // source
+			parser.setSource(content.toCharArray()); 
 			
 			parser.setResolveBindings(true);
 			CompilationUnit root = (CompilationUnit) parser.createAST(null);
